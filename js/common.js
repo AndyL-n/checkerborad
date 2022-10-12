@@ -51,6 +51,7 @@ com.class.Node = function (x, y) {
 		switch(play.map[y][x]) {
 			case 1:
 				var img = com.whiteImg
+				break
 			case 2:
 				var img = com.redImg
 				break
