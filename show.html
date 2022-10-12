@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>image</title>
+    <style>
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img id="img" src="./img/img/0.png" onload="draw(this)" />
+    </div>
+</body>
+<script>
+
+    window.onload = function () {
+        setInterval(function () {
+            var httpRequest = new XMLHttpRequest();//对象初始化 状态为0
+            httpRequest.open("get", 'http://119.3.215.241:7003/Values/Get');//载入，AJAX 对象开始发送请求,状态为1
+            httpRequest.onreadystatechange = () => {
+                if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+                    if (httpRequest.responseText == "true") {
+                        var img = document.getElementById("img")
+                        index = Math.floor(Math.random() * 20)
+                        img.src = "./img/img/" + index + ".png"
+                    }
+                }
+            };
+            httpRequest.setRequestHeader('Cache-Control', 'no-cache');
+            httpRequest.send();
+        }, 500)
+    }
+
+    function draw(img) {
+        var image = new Image()
+        image.src = img.src
+        var tempWidth, tempHeight
+        var maxWidth = window.innerWidth
+        var maxHeight = window.innerHeight
+        if (image.width > 0 && image.height > 0) {
+            if (image.width / image.height >= maxWidth / maxHeight) {
+                if (image.width > maxWidth) {
+                    tempWidth = maxWidth;
+                    tempHeight = (image.height * maxWidth) / image.width
+                } else {
+                    tempWidth = image.width;
+                    tempHeight = image.height;
+                }
+            } else {
+                if (image.height > maxHeight) {
+                    tempHeight = maxHeight;
+                    tempWidth = (image.width * maxHeight) / image.height;
+                } else {
+                    tempWidth = image.width
+                    tempHeight = image.height
+                }
+            }
+            img.width = tempWidth
+            img.height = tempHeight
+        }
+    }
+</script>
+
+</html>
