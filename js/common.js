@@ -21,6 +21,10 @@ com.init = function () {
 	com.whiteImg.src = "img/stype/white.png"
 	com.blackImg = new Image()
 	com.blackImg.src = "img/stype/black.png"
+	com.blueImg = new Image()
+	com.blueImg.src = "img/stype/blue.png"
+	com.redImg = new Image()
+	com.redImg.src = "img/stype/red.png"
 }
 
 window.onload = function () {
@@ -46,6 +50,14 @@ com.class.Node = function (x, y) {
 		com.ct.save()
 		switch(play.map[y][x]) {
 			case 1:
+				var img = com.whiteImg
+			case 2:
+				var img = com.redImg
+				break
+			case 3:
+				var img = com.blueImg
+				break
+			case 4:
 				var img = com.blackImg
 				break
 			default:
