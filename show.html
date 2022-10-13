@@ -16,15 +16,18 @@
 
 <body>
     <div>
-        <img id="img" src="./img/img/0.png" onload="draw(this)" />
+        <img id="img" onload="draw(this)" />
     </div>
 </body>
 <script>
 
     window.onload = function () {
         var img = document.getElementById("img")
-        index = Math.floor(Math.random() * 20)
-        img.src = "./img/img/" + index + ".png"
+        const length = 20
+        for (let index = 0; index < length; index++) {
+            img.src = "./img/img/" + index + ".png"
+        }
+        
         setInterval(function () {
             var httpRequest = new XMLHttpRequest();//对象初始化 状态为0
             httpRequest.open("get", 'http://119.3.215.241:7003/Values/Get');//载入，AJAX 对象开始发送请求,状态为1
