@@ -33,7 +33,7 @@ play.init = function () {
 
 	//绑定Pad拖拽事件
 	com.canvas.addEventListener("touchstart", play.downCanvas)
-	com.canvas.addEventListener("touchmove", play.moveCanvas)
+	com.canvas.addEventListener("touchmove", play.moveCanvas, {passive: false})
 	com.canvas.addEventListener("touchend", play.upCanvas)
 
 }
