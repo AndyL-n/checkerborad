@@ -15,21 +15,26 @@ play.init = function () {
 		return arr
 	})()
 
-	x = [0,1,1,2,2,2,3,4,5,6,7,8,9,10,11,12,12,12,13,13]
-	y = [0,1,3,3,5,7,8,10,12,9,7,5,7,5,3,2,6,10,4,11]
+	x = [0, 1, 1, 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 12, 13, 13]
+	y = [0, 1, 3, 3, 5, 7, 8, 10, 12, 9, 7, 5, 7, 5, 3, 2, 6, 10, 4, 11]
 	// 白1红2蓝3黑4 
-	c = [2,2,2,2,2,2,2,2,2,2,1,3,3,3,3,3,3,3,3,3]
-	for(var i = 0; i < x.length;i++) {
+	c = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+	for (var i = 0; i < x.length; i++) {
 		play.map[y[i]][x[i]] = c[i]
 		var node = new com.class.Node(x[i], y[i])
 		com.childList.push(node)
 	}
 
 	com.show()
-	//绑定拖拽事件
+	//绑定PC拖拽事件
 	com.canvas.addEventListener("mousedown", play.downCanvas)
 	com.canvas.addEventListener("mousemove", play.moveCanvas)
 	com.canvas.addEventListener("mouseup", play.upCanvas)
+
+	//绑定Pad拖拽事件
+	com.canvas.addEventListener("touchstart", play.downCanvas)
+	com.canvas.addEventListener("touchmove", play.moveCanvas)
+	com.canvas.addEventListener("touchend", play.upCanvas)
 
 }
 
@@ -55,7 +60,7 @@ play.moveCanvas = function (e) {
 	var y = point.y
 	var index = 0
 	if (play.map[y][x] == 0 && (x != play.x || y != play.y)) {
-		for (;index < com.childList.length; index++) {
+		for (; index < com.childList.length; index++) {
 			if (play.x == com.childList[index].x && play.y == com.childList[index].y) {
 				break
 			}
